@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+import asyncio 
 import os
 import random
 import json
@@ -24,6 +25,12 @@ async def root():
 
 @app.get('/random-book')
 async def random_book():
+    return random.choice(books_data)
+
+
+@app.get('/random-book-delayed')
+async def random_book_delayed():
+    await asyncio.sleep(2)
     return random.choice(books_data)
 
 
