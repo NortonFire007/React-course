@@ -1,15 +1,15 @@
 import { useState } from 'react';
 
-const PlayerInfo = ({ initialName, symbol, isActive }) => {
+const PlayerInfo = ({ initialName, symbol, isActive, onChangeName }) => {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEdtitClick = () => {
     setIsEditing((editing) => !editing);
-    // setIsEditing(!isEditing); - it is bad practise
-    // Example: isEditing = true
-    // setIsEditing(!isEditing); expexted=false  real-false  |  setIsEditing((editing) => !editing);   expexted=false  real-false
-    // setIsEditing(!isEditing); expexted=true  real-false   |  setIsEditing((editing) => !editing);    expexted=true  real-true
+
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   };
 
   const handleChangeName = (e) => {
